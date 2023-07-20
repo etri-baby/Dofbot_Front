@@ -14,30 +14,68 @@ export default function TestPage() {
 }
 
 export function TestGamepadConnect() {
-  const [pad, setPad] = useState("disconnect")
+  const [gamepadState, setGamepadState] = useState(null);
+
   useEffect(() => {
-    const handleGamepadConnected = (event) => {
-      const gamepad = event.gamepad;
-      console.log('Gamepad connected:', gamepad.id);
-      // Jetson Nano로 데이터 전송 및 원하는 작업 수행
-      setPad(gamepad.id)
+    const updateGamepadState = () => {
+      const gamepads = navigator.getGamepads();
+      if (!gamepads) return;
+
+      const gamepad = gamepads[0];
+      setGamepadState(gamepad);
     };
 
-    const handleGamepadDisconnected = (event) => {
-      const gamepad = event.gamepad;
-      console.log('Gamepad disconnected:', gamepad.id);
-      // 연결 해제시 처리 내용
-      setPad("disconnect")
+    const handleGamepadConnected = () => {
+      console.log('Gamepad connected');
+      updateGamepadState();
     };
+
+    const handleGamepadDisconnected = () => {
+      console.log('Gamepad disconnected');
+      setGamepadState(null);
+    };
+
+    const gamepadLoop = setInterval(updateGamepadState, 100); // 100ms 간격으로 확인
 
     window.addEventListener('gamepadconnected', handleGamepadConnected);
     window.addEventListener('gamepaddisconnected', handleGamepadDisconnected);
 
     return () => {
+      clearInterval(gamepadLoop);
       window.removeEventListener('gamepadconnected', handleGamepadConnected);
       window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
     };
-  }, [pad]);
+  }, []);
 
-  return <div>{pad}</div>;
+  const renderGamepadState = () => {
+    if (!gamepadState) {
+      return <div>No gamepad connected</div>;
+    }
+
+    const buttons = {};
+    gamepadState.buttons.forEach((button, index) => {
+      buttons[`button${index}`] = button.pressed;
+    });
+
+    const axes = {};
+    gamepadState.axes.forEach((axis, index) => {
+      axes[`axis${index}`] = axis;
+    });
+
+    return (
+      <div>
+        <h2>Gamepad State:</h2>
+        <div>
+          <h3>Buttons:</h3>
+          <pre>{JSON.stringify(buttons, null, 2)}</pre>
+        </div>
+        <div>
+          <h3>Axes:</h3>
+          <pre>{JSON.stringify(axes, null, 2)}</pre>
+        </div>
+      </div>
+    );
+  };
+
+  return <div>{renderGamepadState()}</div>;
 }
