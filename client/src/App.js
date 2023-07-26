@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import TestPage from './components/TestPage';
+import TestPage, { TestMqttCon } from './components/TestPage';
 import { TestGamepadConnect } from './components/TestPage';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <div>Welcome DOFBOT</div>
       <TestPage></TestPage>
       <TestGamepadConnect></TestGamepadConnect>
+      <TestMqttCon></TestMqttCon>
     </div>
   );
 }

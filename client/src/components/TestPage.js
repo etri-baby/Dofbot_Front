@@ -79,3 +79,42 @@ export function TestGamepadConnect() {
 
   return <div>{renderGamepadState()}</div>;
 }
+
+export function TestMqttCon() {
+  const [topic, setTopic] = useState("test");
+  const [message, setMessage] = useState("Hi, Pi");
+
+  const handlePostMessage = () => {
+    const data = {
+      topic: topic,
+      message: message // 올바른 값을 가져오는지 확인하세요.
+    };
+
+    axios.post("/api/message", data)
+      .then(response => {
+        // Handle the response from the server if needed
+        console.log("Message sent successfully!");
+        console.log(response.data); // This will contain the response data from the server
+      })
+      .catch(error => {
+        // Handle errors if the request fails
+        console.error("Error sending message:", error);
+      });
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={topic}
+        onChange={(e) => setTopic(e.target.value)}
+      />
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)} // 올바른 값을 설정하는지 확인하세요.
+      />
+      <button onClick={handlePostMessage}>메시지 전송</button>
+    </div>
+  );
+}
