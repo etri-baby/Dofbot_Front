@@ -87,18 +87,20 @@ export function TestMqttCon() {
   const handlePostMessage = () => {
     const data = {
       topic: topic,
-      message: message // 올바른 값을 가져오는지 확인하세요.
+      message: message,
+      retained: false, // Set to true if you want the message to be retained
+      qos: 0, // Set the Quality of Service (QoS) level (0, 1, or 2)
     };
 
-    axios.post("/api/message", data)
+    axios.post("/api/mqtt/publish", null, {
+      params: data, // Pass the data as query parameters
+    })
       .then(response => {
-        // Handle the response from the server if needed
-        console.log("Message sent successfully!");
-        console.log(response.data); // This will contain the response data from the server
+        console.log("메시지 전송 성공!");
+        console.log(response.data);
       })
       .catch(error => {
-        // Handle errors if the request fails
-        console.error("Error sending message:", error);
+        console.error("메시지 전송 오류:", error);
       });
   };
 
@@ -112,7 +114,7 @@ export function TestMqttCon() {
       <input
         type="text"
         value={message}
-        onChange={(e) => setMessage(e.target.value)} // 올바른 값을 설정하는지 확인하세요.
+        onChange={(e) => setMessage(e.target.value)}
       />
       <button onClick={handlePostMessage}>메시지 전송</button>
     </div>
