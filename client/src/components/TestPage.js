@@ -76,7 +76,7 @@ export function TestGamepadConnect() {
   };
 
   useEffect(() => {
-    const interval = setInterval(sendGamepadDataToServer, 300); // 100ms interval to send data
+    const interval = setInterval(sendGamepadDataToServer, 100); // 100ms interval to send data
 
     return () => clearInterval(interval);
   }, [gamepadState]);
