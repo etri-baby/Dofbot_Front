@@ -47,6 +47,40 @@ export function TestGamepadConnect() {
     };
   }, []);
 
+  const sendGamepadDataToServer = async () => {
+    if (!gamepadState) return; // Don't send data if no gamepad is connected
+
+    try {
+      const buttons = {};
+      gamepadState.buttons.forEach((button, index) => {
+        buttons[`button_${index}`] = button.pressed ? true : false;
+      });
+
+      const axes = {};
+      gamepadState.axes.forEach((axis, index) => {
+        axes[`axis_${index}`] = axis;
+      });
+
+      // Send the gamepad data to the server as URL query parameters
+      const queryString = new URLSearchParams({
+        ...axes,
+        ...buttons,
+      }).toString();
+
+      const response = await axios.post(`/api/mqtt/send_pad_data?${queryString}`);
+
+      console.log(response.data); // Log the server's response (optional)
+    } catch (error) {
+      console.error('Error sending gamepad data:', error);
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(sendGamepadDataToServer, 300); // 100ms interval to send data
+
+    return () => clearInterval(interval);
+  }, [gamepadState]);
+
   const renderGamepadState = () => {
     if (!gamepadState) {
       return <div>No gamepad connected</div>;
@@ -120,3 +154,6 @@ export function TestMqttCon() {
     </div>
   );
 }
+
+
+
