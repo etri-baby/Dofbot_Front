@@ -14,15 +14,34 @@ export default function TestPage() {
 }
 
 export function TestGamepadConnect() {
-  const [gamepadState, setGamepadState] = useState(null);
+  const [gamepadState, setGamepadState] = useState();
+  const [flag, setFlag] = useState(false)
 
   useEffect(() => {
     const updateGamepadState = () => {
       const gamepads = navigator.getGamepads();
       if (!gamepads) return;
-
+    
       const gamepad = gamepads[0];
-      setGamepadState(gamepad);
+    
+      if (!gamepadState) {
+        setGamepadState(gamepad);
+      } else {
+        const buttonsChanged = gamepad.buttons.some(
+          (button, index) => button.pressed !== gamepadState.buttons[index].pressed
+        );
+    
+        const axesChanged = gamepad.axes.some(
+          (axisValue, index) => axisValue !== gamepadState.axes[index]
+        );
+    
+        if (buttonsChanged || axesChanged) {
+          setGamepadState(gamepad);
+          setFlag(true);
+        } else {
+          setFlag(false);
+        }
+      }
     };
 
     const handleGamepadConnected = () => {
@@ -49,7 +68,8 @@ export function TestGamepadConnect() {
 
   const sendGamepadDataToServer = async () => {
     if (!gamepadState) return; // Don't send data if no gamepad is connected
-
+    console.log(flag)
+    if (flag === false) return;
     try {
       const buttons = {};
       gamepadState.buttons.forEach((button, index) => {
