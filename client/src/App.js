@@ -1,15 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import TestPage, { TestMqttCon } from './components/TestPage';
-import { TestGamepadConnect } from './components/TestPage';
-import MqttCameraTry from './components/MqttCameraTry';
+
+import { Routes, Route } from "react-router-dom"
+
+import SmartArmDashboard from './components/smart_arm/SmartArmDashboard';
+import SmartFarmDashboard from './components/smart_farm/SmartFarmDashboard';
+import SmartHomeDashboard from './components/smart_home/SmartHomeDashboard';
+import Intro from './components/Intro';
+
 
 function App() {
   return (
     <div className="App">
-      <div>Welcome DOFBOT</div>
-      <TestGamepadConnect />
-      <MqttCameraTry />
+      <Routes>
+        <Route path = "/" element={<Intro />} />
+        <Route path = "/smart_arm" element={<SmartArmDashboard />} />
+        <Route path = "/smart_farm" element={<SmartFarmDashboard />} />
+        <Route path = "/smart_home" element={<SmartHomeDashboard />} />
+      </Routes>
     </div>
   );
 }
