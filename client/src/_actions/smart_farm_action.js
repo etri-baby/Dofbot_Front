@@ -1,16 +1,16 @@
 import axios from "axios";
 import {
-    CHECK_SERVO
-} from "./types";
-import { CLIENT_SERVER } from "../components/Config.js";
+    CHECK_PING
+} from "./smart_farm_types";
+import { SMART_FARM_SERVER } from "../components/Config.js";
 
 export function checkServo() {
     const request = axios
-        .get(`${CLIENT_SERVER}/check`)
+        .get(`${SMART_FARM_SERVER}/ping`)
         .then((response) => response.data);
 
     return {
-        type: CHECK_SERVO,
+        type: CHECK_PING,
         payload: request,
     };
 }
