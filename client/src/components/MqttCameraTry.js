@@ -2,39 +2,52 @@ import React, { useEffect, useState } from 'react';
 import Paho from 'paho-mqtt';
 
 function MqttCameraTry() {
-  const [imageData, setImageData] = useState(''); // 이미지 데이터 상태
+  const [imageData, setImageData] = useState('');
+  const [client, setClient] = useState(null);
 
   useEffect(() => {
-    // MQTT 브로커 정보 설정
     const brokerHost = '129.254.174.120';
     const brokerPort = 9002;
     const clientId = `mqtt_subscriber_${Math.random().toString(16).substr(2, 8)}`;
-    const topic = 'my/topic'; // 구독할 토픽
+    const topic = 'jetson/camera';
 
-    // MQTT 클라이언트 생성
-    const client = new Paho.Client(brokerHost, brokerPort, clientId);
+    const mqttClient = new Paho.Client(brokerHost, brokerPort, clientId);
+    setClient(mqttClient);
 
-    // 메시지 수신 시 처리
-    client.onMessageArrived = (message) => {
-        console.log("1")
-      setImageData(message.payloadString); // 이미지 데이터 업데이트
-    };
-
-    // MQTT 연결 및 토픽 구독
-    client.connect({
+    const connectOptions = {
       onSuccess: () => {
         console.log('MQTT 연결 성공');
-        client.subscribe(topic); // 토픽 구독
+        mqttClient.subscribe(topic);
       },
       onFailure: (error) => {
         console.error('MQTT 연결 실패', error);
+        tryReconnect();
       },
-    });
+    };
 
-    // 컴포넌트 언마운트 시 MQTT 연결 해제
+    const tryReconnect = () => {
+      if (!mqttClient.isConnected()) {
+        console.log('MQTT 재연결 시도...');
+        mqttClient.connect(connectOptions);
+      }
+    };
+
+    mqttClient.onMessageArrived = (message) => {
+      setImageData(message.payloadString);
+    };
+
+    mqttClient.connect(connectOptions);
+
+    mqttClient.onConnectionLost = (responseObject) => {
+      if (responseObject.errorCode !== 0) {
+        console.error(`MQTT 연결이 끊어졌습니다: ${responseObject.errorMessage}`);
+        setTimeout(tryReconnect, 3000); // 3초 후 재연결 시도
+      }
+    };
+
     return () => {
-      if (client.isConnected()) {
-        client.disconnect();
+      if (mqttClient.isConnected()) {
+        mqttClient.disconnect();
         console.log('MQTT 연결 종료');
       }
     };
@@ -43,7 +56,6 @@ function MqttCameraTry() {
   return (
     <div>
       <h1>MQTT Subscriber & Streaming Example</h1>
-      {/* imageData 상태에 있는 이미지 데이터를 img 태그의 src 속성에 지정 */}
       <img src={`data:image/jpeg;base64, ${imageData}`} alt="Received" />
     </div>
   );
