@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Col, Row, Tab, Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Tabs from 'react-bootstrap/Tabs';
 
 function SmartFarmDashboard() {
-    const [key, setKey] = useState('SmartFarm');
+    const [iotKey, setIotKey] = useState('SmartFarm');
+    const [intervalKey, setIntervalKey] = useState('1D');
     const [currentTime, setCurrentTime] = useState(new Date());
     const navigate = useNavigate();
 
@@ -20,11 +19,19 @@ function SmartFarmDashboard() {
         };
     }, [currentTime]);
 
-    const containerStyle = {
+    const IoTcontainerStyle = {
         border: '2px solid #000', // 테두리 스타일 설정
         padding: '5px', // 내부 여백 설정
         borderRadius: '10px', // 테두리 곡선 설정
         width: '20vmax',
+        margin: 'auto',
+    };
+
+    const dataIntervalContainerStyle = {
+        border: '1px solid #000', // 테두리 스타일 설정
+        padding: '5px', // 내부 여백 설정
+        borderRadius: '10px', // 테두리 곡선 설정
+        width: '10vmax',
         margin: 'auto',
     };
 
@@ -55,11 +62,46 @@ function SmartFarmDashboard() {
             <div className="grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
                 <div>{/* Grid 0 */}</div>
                 <div className="justify-self-start">
-                    <ButtonGroup aria-label="Basic example" className="custom-button">
-                        <Button variant="dark">1D</Button>
-                        <Button variant="dark">1W</Button>
-                        <Button variant="dark">1M</Button>
-                    </ButtonGroup>
+                    <div style={dataIntervalContainerStyle} className="d-flex justify-content-center">
+                        <Tab.Container defaultActiveKey="SmartFarm">
+                            <Row>
+                                <Col>
+                                    <Nav
+                                        variant="pills"
+                                        className="d-flex flex-row"
+                                        onSelect={(eventKey) => {
+                                            setIntervalKey(eventKey);
+                                        }}
+                                    >
+                                        <Nav.Item>
+                                            <Nav.Link
+                                                eventKey="1D"
+                                                style={intervalKey === '1D' ? activeTabItemStyle : tabItemStyle}
+                                            >
+                                                1D
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item>
+                                            <Nav.Link
+                                                eventKey="1W"
+                                                style={intervalKey === '1W' ? activeTabItemStyle : tabItemStyle}
+                                            >
+                                                1W
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item>
+                                            <Nav.Link
+                                                eventKey="1M"
+                                                style={intervalKey === '1M' ? activeTabItemStyle : tabItemStyle}
+                                            >
+                                                1M
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                    </Nav>
+                                </Col>
+                            </Row>
+                        </Tab.Container>
+                    </div>
                 </div>
                 <div className="justify-self-end">
                     <Button
@@ -76,9 +118,9 @@ function SmartFarmDashboard() {
             <br />
             <div className="grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
                 <div>
-                    <h2>{key} Dashboard</h2>
+                    <h2>{iotKey} Dashboard</h2>
                     <br />
-                    <div style={containerStyle}>
+                    <div style={IoTcontainerStyle} className="d-flex justify-content-center">
                         <Tab.Container defaultActiveKey="SmartFarm">
                             <Row>
                                 <Col>
@@ -86,14 +128,14 @@ function SmartFarmDashboard() {
                                         variant="pills"
                                         className="d-flex flex-row"
                                         onSelect={(eventKey) => {
-                                            setKey(eventKey);
+                                            setIotKey(eventKey);
                                         }}
                                         justify
                                     >
                                         <Nav.Item>
                                             <Nav.Link
                                                 eventKey="SmartFarm"
-                                                style={key === 'SmartFarm' ? activeTabItemStyle : tabItemStyle}
+                                                style={iotKey === 'SmartFarm' ? activeTabItemStyle : tabItemStyle}
                                             >
                                                 SmartFarm
                                             </Nav.Link>
@@ -101,7 +143,7 @@ function SmartFarmDashboard() {
                                         <Nav.Item>
                                             <Nav.Link
                                                 eventKey="SmartHome"
-                                                style={key === 'SmartHome' ? activeTabItemStyle : tabItemStyle}
+                                                style={iotKey === 'SmartHome' ? activeTabItemStyle : tabItemStyle}
                                             >
                                                 SmartHome
                                             </Nav.Link>
@@ -109,7 +151,7 @@ function SmartFarmDashboard() {
                                         <Nav.Item>
                                             <Nav.Link
                                                 eventKey="SmartArm"
-                                                style={key === 'SmartArm' ? activeTabItemStyle : tabItemStyle}
+                                                style={iotKey === 'SmartArm' ? activeTabItemStyle : tabItemStyle}
                                             >
                                                 SmartArm
                                             </Nav.Link>
