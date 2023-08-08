@@ -55,7 +55,7 @@ function MqttCameraTry() {
 
   return (
     <div>
-      <h1>MQTT Subscriber & Streaming Example</h1>
+      <h1>Arm Streaming</h1>
       <img src={`data:image/jpeg;base64, ${imageData}`} alt="Received" />
     </div>
   );

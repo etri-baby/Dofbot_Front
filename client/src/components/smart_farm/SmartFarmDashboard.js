@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 function SmartFarmDashboard() {
-  return (
-    <div>SmartFarmDashboard</div>
-  )
+    return <></>;
 }
 
-export default SmartFarmDashboard
+export default SmartFarmDashboard;
