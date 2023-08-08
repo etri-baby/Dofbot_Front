@@ -108,7 +108,8 @@ function SmartFarmDashboard() {
                         variant="dark"
                         className="custom-button"
                         onClick={() => {
-                            navigate('/smart_farm');
+                            // eslint-disable-next-line no-restricted-globals
+                            location.reload();
                         }}
                     >
                         Refresh
