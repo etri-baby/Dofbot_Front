@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MqttCameraTry from './MqttCameraTry';
 
 export default function SmartArmDashboard() {
     const [iotKey, setIotKey] = useState('SmartArm');
@@ -224,108 +225,119 @@ export default function SmartArmDashboard() {
                         <h3 className="d-none d-sm-block">{getFormattedTime(currentTime)}</h3>
                     </div>
                 </div>
-                <div className="row-span-1 custom-box">Camera</div>
+                <div className="row-span-1 arm-custom-box justify-center">
+                    <MqttCameraTry />
+                </div>
                 <div className="inner-fit-custom-box">
-                    <div className="grid grid-rows-1 grid-cols-4 grid-flow-col gap-4 mx-8 my-8 justify-center">
-                        <div className="inner-fit-custom-box">
-                            <div className="grid grid-cols-3 direction-buttons">
-                                <div>{/* Grid 1 */}</div>
-                                <div>
-                                    <button
-                                        className="button-up"
-                                        onMouseDown={() => handleAxisPress('1', -1)}
-                                        onMouseUp={() => handleAxisRelease('1', -0.0039)}
-                                    >
-                                        ↑
-                                    </button>
-                                </div>
-                                <div>{/* Grid 3 */}</div>
-                                <div>
-                                    <button
-                                        className="button-left"
-                                        onMouseDown={() => handleAxisPress('0', -1)}
-                                        onMouseUp={() => handleAxisRelease('0', -0.0039)}
-                                    >
-                                        ←
-                                    </button>
-                                </div>
-                                <div>{/* Grid 5 */}</div>
-                                <div>
-                                    <button
-                                        className="button-right"
-                                        onMouseDown={() => handleAxisPress('0', 1)}
-                                        onMouseUp={() => handleAxisRelease('0', -0.0039)}
-                                    >
-                                        →
-                                    </button>
-                                </div>
-                                <div>{/* Grid 7 */}</div>
-                                <div>
-                                    <button
-                                        className="button-down"
-                                        onMouseDown={() => handleAxisPress('1', 1)}
-                                        onMouseUp={() => handleAxisRelease('1', -0.0039)}
-                                    >
-                                        ↓
-                                    </button>
-                                </div>
-                                <div>{/* Grid 9 */}</div>
+                    <div className="grid grid-rows-2 grid-cols-4 grid-flow-col gap-4 mx-8 my-8">
+                        <div className="grid grid-cols-3 direction-buttons">
+                            <div>{/* Grid 1 */}</div>
+                            <div>
+                                <button
+                                    className="button-up"
+                                    onMouseDown={() => handleAxisPress('1', -1)}
+                                    onMouseUp={() => handleAxisRelease('1', -0.0039)}
+                                >
+                                    ↑
+                                </button>
                             </div>
+                            <div>{/* Grid 3 */}</div>
+                            <div>
+                                <button
+                                    className="button-left"
+                                    onMouseDown={() => handleAxisPress('0', -1)}
+                                    onMouseUp={() => handleAxisRelease('0', -0.0039)}
+                                >
+                                    ←
+                                </button>
+                            </div>
+                            <div>{/* Grid 5 */}</div>
+                            <div>
+                                <button
+                                    className="button-right"
+                                    onMouseDown={() => handleAxisPress('0', 1)}
+                                    onMouseUp={() => handleAxisRelease('0', -0.0039)}
+                                >
+                                    →
+                                </button>
+                            </div>
+                            <div>{/* Grid 7 */}</div>
+                            <div>
+                                <button
+                                    className="button-down"
+                                    onMouseDown={() => handleAxisPress('1', 1)}
+                                    onMouseUp={() => handleAxisRelease('1', -0.0039)}
+                                >
+                                    ↓
+                                </button>
+                            </div>
+                            <div>{/* Grid 9 */}</div>
+                        </div>
 
-                            <div className="row row-span-2 middle-buttons">
-                                <button
-                                    className="button-select"
-                                    onMouseDown={() => handleButtonPress('8')}
-                                    onMouseUp={() => handleButtonRelease('8')}
-                                >
-                                    SELECT
-                                </button>
-                            </div>
-                            <div className="row row-span-2 middle-buttons">
-                                <button
-                                    className="button-start"
-                                    onMouseDown={() => handleButtonPress('9')}
-                                    onMouseUp={() => handleButtonRelease('9')}
-                                >
-                                    START
-                                </button>
-                            </div>
-                            <div className="row row-span-2 number-buttons">
-                                <button
-                                    className="button-1"
-                                    onMouseDown={() => handleButtonPress('0')}
-                                    onMouseUp={() => handleButtonRelease('0')}
-                                >
-                                    1
-                                </button>
-                                <button
-                                    className="button-2"
-                                    onMouseDown={() => handleButtonPress('1')}
-                                    onMouseUp={() => handleButtonRelease('1')}
-                                >
-                                    2
-                                </button>
-                                <button
-                                    className="button-3"
-                                    onMouseDown={() => handleButtonPress('2')}
-                                    onMouseUp={() => handleButtonRelease('2')}
-                                >
-                                    3
-                                </button>
-                                <button
-                                    className="button-4"
-                                    onMouseDown={() => handleButtonPress('3')}
-                                    onMouseUp={() => handleButtonRelease('3')}
-                                >
-                                    4
-                                </button>
-                            </div>
+                        <div className="row row-span-2 middle-buttons">
+                            <button
+                                className="button-select"
+                                onMouseDown={() => handleButtonPress('8')}
+                                onMouseUp={() => handleButtonRelease('8')}
+                            >
+                                SELECT
+                            </button>
+                        </div>
+                        <div className="row row-span-2 middle-buttons">
+                            <button
+                                className="button-select"
+                                onMouseDown={() => handleButtonPress('9')}
+                                onMouseUp={() => handleButtonRelease('9')}
+                            >
+                                ?
+                            </button>
+                        </div>
+                        <div className="row row-span-2 number-buttons">
+                            <button
+                                className="button-1"
+                                onMouseDown={() => handleButtonPress('0')}
+                                onMouseUp={() => handleButtonRelease('0')}
+                            >
+                                1
+                            </button>
+                            <button
+                                className="button-2"
+                                onMouseDown={() => handleButtonPress('1')}
+                                onMouseUp={() => handleButtonRelease('1')}
+                            >
+                                2
+                            </button>
+                            <button
+                                className="button-3"
+                                onMouseDown={() => handleButtonPress('2')}
+                                onMouseUp={() => handleButtonRelease('2')}
+                            >
+                                3
+                            </button>
+                            <button
+                                className="button-4"
+                                onMouseDown={() => handleButtonPress('3')}
+                                onMouseUp={() => handleButtonRelease('3')}
+                            >
+                                4
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
             <br />
-            <div className="custom-box">Button Press Status</div>
+            <div className="arm-custom-box grid grid-cols-2 grid-rows-5 gap-4">
+                <div className="button-up">↑</div>
+                <div className="button-down">↓</div>
+                <div className="button-left">←</div>
+                <div className="button-right">→</div>
+                <div className="button-select">RESET</div>
+                <div className="button-select">?</div>
+                <div className="button-1">1</div>
+                <div className="button-2">2</div>
+                <div className="button-3">3</div>
+                <div className="button-4">4</div>
+            </div>
         </div>
     );
 }

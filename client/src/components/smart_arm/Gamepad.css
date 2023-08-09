@@ -80,3 +80,10 @@
 .button-4 {
     border-radius: 50%;
 }
+
+.arm-custom-box {
+    border: 1px solid #000;
+    padding: 5px;
+    border-radius: 10px;
+    height: 280px;
+}
