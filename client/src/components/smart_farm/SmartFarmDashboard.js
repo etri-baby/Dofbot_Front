@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 
 function SmartFarmDashboard() {
     const [iotKey, setIotKey] = useState('SmartFarm');
@@ -63,7 +64,7 @@ function SmartFarmDashboard() {
                 <div>{/* Grid 0 */}</div>
                 <div className="justify-self-start">
                     <div style={dataIntervalContainerStyle} className="d-flex justify-content-center">
-                        <Tab.Container defaultActiveKey="SmartFarm">
+                        <Tab.Container defaultActiveKey="1D">
                             <Row>
                                 <Col>
                                     <Nav
@@ -129,7 +130,9 @@ function SmartFarmDashboard() {
                                         variant="pills"
                                         className="d-flex flex-row"
                                         onSelect={(eventKey) => {
+                                            const transformedKey = eventKey.toLowerCase().replace('smart', 'smart_');
                                             setIotKey(eventKey);
+                                            navigate(`/${transformedKey}`);
                                         }}
                                         justify
                                     >
@@ -163,11 +166,27 @@ function SmartFarmDashboard() {
                         </Tab.Container>
                     </div>
                     <br />
-                    <h3>{getFormattedTime(currentTime)}</h3>
+                    <h3 className="d-none d-sm-block">{getFormattedTime(currentTime)}</h3>
                 </div>
                 <div className="custom-box">Temperature</div>
                 <div className="custom-box">Humidity</div>
-                <div className="custom-box">Auto Control</div>
+
+                <div className="custom-box">
+                    <h2>Auto Control</h2>
+                    <div className="grid grid-cols-2  justify-items-stretch">
+                        <CustomFormControl title={'Temperature'} />
+                        <CustomFormControl title={'Humidity'} />
+                        <CustomFormControl title={'Illuminance'} />
+                        <CustomFormControl title={'Soil Humidity'} />
+                        <CustomFormControl title={'Carbon Dioxide'} />
+                    </div>
+                    <div className="d-flex justify-content-center" style={{ alignContent: 'end' }}>
+                        <Button style={{ background: 'black', border: '1px solid black', marginRight: '1vmax' }}>
+                            제출
+                        </Button>
+                        <Button style={{ background: 'black', border: '1px solid black' }}>초기화</Button>
+                    </div>
+                </div>
                 <div className="custom-box">Illuminance</div>
                 <div className="custom-box">Soil Humidity</div>
                 <div className="custom-box">Streaming</div>
@@ -179,3 +198,14 @@ function SmartFarmDashboard() {
 }
 
 export default SmartFarmDashboard;
+
+function CustomFormControl(props) {
+    return (
+        <>
+            <h5 className="text-center">{props.title}</h5>
+            <div style={{ paddingLeft: '1vmax' }}>
+                <Form.Control type={props.title} id={props.title} style={{ width: '7vmax', height: '1.5vmax' }} />
+            </div>
+        </>
+    );
+}

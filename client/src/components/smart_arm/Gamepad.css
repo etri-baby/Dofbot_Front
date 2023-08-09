@@ -1,0 +1,82 @@
+.gamepad-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    background-color: #e0e0e0;
+}
+
+.direction-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.middle-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.number-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.button-up,
+.button-down,
+.button-left,
+.button-right,
+.button-select,
+.button-start,
+.button-1,
+.button-2,
+.button-3,
+.button-4 {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 14px;
+}
+
+.button-up {
+    border-radius: 50% 50% 0 0;
+}
+
+.button-down {
+    border-radius: 0 0 50% 50%;
+}
+
+.button-left {
+    border-radius: 50% 0 0 50%;
+}
+
+.button-right {
+    border-radius: 0 50% 50% 0;
+}
+
+.button-select {
+    width: 60px;
+}
+
+.button-start {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid green;
+}
+
+.button-1,
+.button-2,
+.button-3,
+.button-4 {
+    border-radius: 50%;
+}
