@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Paho from 'paho-mqtt';
+import Spinner from 'react-bootstrap/Spinner';
 
 function MqttCameraTry() {
     const [imageData, setImageData] = useState('');
     const [client, setClient] = useState(null);
+    const [con, setCon] = useState(false);
 
     useEffect(() => {
         const brokerHost = '129.254.174.120';
@@ -17,6 +19,7 @@ function MqttCameraTry() {
         const connectOptions = {
             onSuccess: () => {
                 console.log('MQTT 연결 성공');
+                setCon(true);
                 mqttClient.subscribe(topic);
             },
             onFailure: (error) => {
@@ -41,6 +44,7 @@ function MqttCameraTry() {
         mqttClient.onConnectionLost = (responseObject) => {
             if (responseObject.errorCode !== 0) {
                 console.error(`MQTT 연결이 끊어졌습니다: ${responseObject.errorMessage}`);
+                setCon(false);
                 setTimeout(tryReconnect, 3000); // 3초 후 재연결 시도
             }
         };
@@ -53,9 +57,38 @@ function MqttCameraTry() {
         };
     }, []);
 
+    // MqttCameraTry.js
+
     return (
-        <div>
-            <img src={`data:image/jpeg;base64, ${imageData}`} alt="Camera" />
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+            }}
+        >
+            <h4>Camera</h4>
+            {con === false ? (
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">카메라 불러오는 중...</span>
+                </Spinner>
+            ) : (
+                <div style={{ maxWidth: '70%', maxHeight: '70%', width: '70%', height: '70%' }}>
+                    <img
+                        src={`data:image/jpeg;base64, ${imageData}`}
+                        style={{
+                            maxWidth: '100%',
+                            maxHeight: '100%',
+                            width: '100%',
+                            height: '100%',
+                            border: '1',
+                            objectFit: 'contain',
+                        }}
+                    />
+                </div>
+            )}
         </div>
     );
 }

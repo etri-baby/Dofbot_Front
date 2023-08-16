@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import MqttCameraTry from './MqttCameraTry';
+import MqttCameraTry from '../utils/Camera';
 
 export default function SmartArmDashboard() {
     const [iotKey, setIotKey] = useState('SmartArm');
@@ -200,14 +200,14 @@ export default function SmartArmDashboard() {
                                                     SmartFarm
                                                 </Nav.Link>
                                             </Nav.Item>
-                                            <Nav.Item>
+                                            {/* <Nav.Item>
                                                 <Nav.Link
                                                     eventKey="SmartHome"
                                                     style={iotKey === 'SmartHome' ? activeTabItemStyle : tabItemStyle}
                                                 >
                                                     SmartHome
                                                 </Nav.Link>
-                                            </Nav.Item>
+                                            </Nav.Item> */}
                                             <Nav.Item>
                                                 <Nav.Link
                                                     eventKey="SmartArm"

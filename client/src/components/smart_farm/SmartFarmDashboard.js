@@ -3,6 +3,13 @@ import Button from 'react-bootstrap/Button';
 import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import MqttCameraTry from '../utils/Camera';
+
+import Temperature from '../utils/Temperature';
+import Humidity from '../utils/Humidity';
+import Illuminance from '../utils/Illuminance';
+import CarbonDioxide from '../utils/CarbonDioxide';
+import SoilHumidity from '../utils/SoilHumidity';
 
 function SmartFarmDashboard() {
     const [iotKey, setIotKey] = useState('SmartFarm');
@@ -144,14 +151,14 @@ function SmartFarmDashboard() {
                                                 SmartFarm
                                             </Nav.Link>
                                         </Nav.Item>
-                                        <Nav.Item>
+                                        {/* <Nav.Item>
                                             <Nav.Link
                                                 eventKey="SmartHome"
                                                 style={iotKey === 'SmartHome' ? activeTabItemStyle : tabItemStyle}
                                             >
                                                 SmartHome
                                             </Nav.Link>
-                                        </Nav.Item>
+                                        </Nav.Item> */}
                                         <Nav.Item>
                                             <Nav.Link
                                                 eventKey="SmartArm"
@@ -168,11 +175,15 @@ function SmartFarmDashboard() {
                     <br />
                     <h3 className="d-none d-sm-block">{getFormattedTime(currentTime)}</h3>
                 </div>
-                <div className="custom-box">Temperature</div>
-                <div className="custom-box">Humidity</div>
+                <div className="custom-box">
+                    <Temperature />
+                </div>
+                <div className="custom-box">
+                    <Humidity />
+                </div>
 
                 <div className="custom-box">
-                    <h2>Auto Control</h2>
+                    <h4>Auto Control</h4>
                     <div className="grid grid-cols-2  justify-items-stretch">
                         <CustomFormControl title={'Temperature'} />
                         <CustomFormControl title={'Humidity'} />
@@ -187,11 +198,21 @@ function SmartFarmDashboard() {
                         <Button style={{ background: 'black', border: '1px solid black' }}>초기화</Button>
                     </div>
                 </div>
-                <div className="custom-box">Illuminance</div>
-                <div className="custom-box">Soil Humidity</div>
-                <div className="custom-box">Streaming</div>
-                <div className="custom-box">Carbon Dioxide</div>
-                <div className="custom-box">Buttons</div>
+                <div className="custom-box">
+                    <Illuminance />
+                </div>
+                <div className="custom-box">
+                    <SoilHumidity />
+                </div>
+                <div className="custom-box">
+                    <MqttCameraTry />
+                </div>
+                <div className="custom-box">
+                    <CarbonDioxide />
+                </div>
+                <div className="custom-box">
+                    <h4>Buttons</h4>
+                </div>
             </div>
         </div>
     );
