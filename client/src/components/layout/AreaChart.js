@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-function AreaChart({ series, titleName, color }) {
+function AreaChart({ series, titleName, color, subtitleName }) {
     const options = {
         series: [series],
         chart: {
@@ -19,6 +19,14 @@ function AreaChart({ series, titleName, color }) {
             align: 'left',
             style: {
                 fontSize: '24px',
+            },
+        },
+        subtitle: {
+            text: subtitleName,
+            align: 'right',
+            style: {
+                fontSize: '20px',
+                fontWeight: 'bold',
             },
         },
         xaxis: {

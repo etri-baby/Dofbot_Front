@@ -10,11 +10,16 @@ import Humidity from '../utils/Humidity';
 import Illuminance from '../utils/Illuminance';
 import CarbonDioxide from '../utils/CarbonDioxide';
 import SoilHumidity from '../utils/SoilHumidity';
+import axios from 'axios';
 
 function SmartFarmDashboard() {
     const [iotKey, setIotKey] = useState('SmartFarm');
     const [intervalKey, setIntervalKey] = useState('1D');
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [temperatureData, setTemperatureData] = useState([]);
+    const [humidityData, setHumidityData] = useState([]);
+    const [soilHumidityData, setSoilHumidityData] = useState([]);
+    const [illuminanceData, setIlluminanceData] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +31,62 @@ function SmartFarmDashboard() {
             clearInterval(interval);
         };
     }, [currentTime]);
+
+    useEffect(() => {
+        let start = new Date();
+        let end = new Date();
+        if (intervalKey === '1D') {
+            start = end;
+        } else if (intervalKey === '1W') {
+            start.setDate(start.getDate() - 6);
+        } else if (intervalKey === '1M') {
+            start.setMonth(start.getMonth() - 1);
+        }
+        start.setHours(0, 0, 0);
+        end.setHours(23, 59, 59);
+
+        const formattedStart = start.toISOString().split('T')[0];
+        const formattedEnd = end.toISOString().split('T')[0];
+
+        axios
+            .get('/api/smartfarm/sensor/date', {
+                params: {
+                    start: formattedStart,
+                    end: formattedEnd,
+                },
+            })
+            .then((response) => {
+                const sensorDataArray = response.data;
+
+                console.log(sensorDataArray);
+
+                const temperatureArray = [];
+                const humidityArray = [];
+                const soilHumidityArray = [];
+                const illuminanceArray = [];
+
+                sensorDataArray.forEach((item) => {
+                    const [data, timestamp] = item;
+                    const parsedData = JSON.parse(data);
+
+                    temperatureArray.push({ temperature: parsedData.temperature, timestamp: timestamp });
+                    humidityArray.push({ humidity: parsedData.humidity, timestamp: timestamp });
+                    soilHumidityArray.push({ soilHumidity: parsedData.soilhumidity, timestamp: timestamp });
+                    illuminanceArray.push({ illuminance: parsedData.illuminance, timestamp: timestamp });
+                });
+
+                setTemperatureData(temperatureArray);
+                setHumidityData(humidityArray);
+                setSoilHumidityData(soilHumidityArray);
+                setIlluminanceData(illuminanceArray);
+
+                console.log(temperatureData);
+                console.log(humidityData);
+            })
+            .catch((error) => {
+                // 오류 처리 코드
+            });
+    }, [intervalKey]);
 
     const IoTcontainerStyle = {
         border: '2px solid #000', // 테두리 스타일 설정
@@ -176,10 +237,10 @@ function SmartFarmDashboard() {
                     <h3 className="d-none d-sm-block">{getFormattedTime(currentTime)}</h3>
                 </div>
                 <div className="custom-box">
-                    <Temperature />
+                    <Temperature temperatureData={temperatureData} />
                 </div>
                 <div className="custom-box">
-                    <Humidity />
+                    <Humidity humidityData={humidityData} />
                 </div>
 
                 <div className="custom-box">
@@ -199,10 +260,10 @@ function SmartFarmDashboard() {
                     </div>
                 </div>
                 <div className="custom-box">
-                    <Illuminance />
+                    <Illuminance illuminanceData={illuminanceData} />
                 </div>
                 <div className="custom-box">
-                    <SoilHumidity />
+                    <SoilHumidity soilHumidityData={soilHumidityData} />
                 </div>
                 <div className="custom-box">
                     <MqttCameraTry />
