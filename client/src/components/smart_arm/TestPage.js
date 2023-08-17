@@ -11,6 +11,28 @@ export default function TestPage() {
     return <div>{str}</div>;
 }
 
+export function TestSubscribe() {
+    useEffect(() => {
+        const interval = setInterval(() => {
+            axios
+                .get('/api/smartarm/subscribe', {
+                    params: {
+                        topic: 'jetson/read',
+                        wait_millis: 700,
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                });
+        }, 1000); // 0.5초마다 요청
+
+        // 컴포넌트가 언마운트될 때 interval 정리
+        return () => clearInterval(interval);
+    }, []);
+
+    return <div>123</div>;
+}
+
 export function TestGamepadConnect() {
     const [gamepadState, setGamepadState] = useState(null);
 

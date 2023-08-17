@@ -5,6 +5,8 @@ import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MqttCameraTry from '../utils/Camera';
+import { TestSubscribe } from './TestPage';
+import Servo from '../utils/Servo';
 
 export default function SmartArmDashboard() {
     const [iotKey, setIotKey] = useState('SmartArm');
@@ -80,7 +82,7 @@ export default function SmartArmDashboard() {
 
             const queryString = `${formattedAxes}&${formattedButtons}`;
 
-            const response = await axios.post(`/api/mqtt/send_pad_data?${queryString}`);
+            const response = await axios.post(`/api/smartarm/send_pad_data?${queryString}`);
             console.log(response.data);
         } catch (error) {
             console.error('Error sending gamepad input:', error);
@@ -99,7 +101,7 @@ export default function SmartArmDashboard() {
 
             const queryString = `${formattedAxes}&${formattedButtons}`;
 
-            const response = await axios.post(`/api/mqtt/send_pad_data?${queryString}`);
+            const response = await axios.post(`/api/smartarm/send_pad_data?${queryString}`);
             console.log(response.data);
         } catch (error) {
             console.error('Error sending gamepad input:', error);
@@ -338,6 +340,7 @@ export default function SmartArmDashboard() {
                 <div className="button-3">3</div>
                 <div className="button-4">4</div>
             </div>
+            <Servo />
         </div>
     );
 }
