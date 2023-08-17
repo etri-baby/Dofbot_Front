@@ -18,7 +18,7 @@ function Illuminance() {
 
     return (
         <div>
-            <AreaChart series={series} titleName={'Illuminance'} />
+            <AreaChart series={series} titleName={'Illuminance'} color="#339933" />
         </div>
     );
 }

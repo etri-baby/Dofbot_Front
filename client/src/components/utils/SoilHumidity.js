@@ -18,7 +18,7 @@ function SoilHumidity() {
 
     return (
         <div>
-            <AreaChart series={series} titleName={'Soil Humidity'} />
+            <AreaChart series={series} titleName={'Soil Humidity'} color="#CF3B32" />
         </div>
     );
 }

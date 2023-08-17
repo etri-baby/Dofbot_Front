@@ -18,7 +18,7 @@ function Temperature() {
 
     return (
         <div>
-            <AreaChart series={series} titleName={'Temperature'} />
+            <AreaChart series={series} titleName={'Temperature'} color="#FFDE5C" />
         </div>
     );
 }

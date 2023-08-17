@@ -8,7 +8,7 @@ function CarbonDioxide() {
             data: [
                 [1486684800000, 34],
                 [1486771200000, 43],
-                [1486857600000, 31],
+                [1486857600000, 100],
                 [1486944000000, 43],
                 [1487030400000, 33],
                 [1487116800000, 52],
@@ -18,7 +18,7 @@ function CarbonDioxide() {
 
     return (
         <div>
-            <AreaChart series={series} titleName={'CarbonDioxide'} />
+            <AreaChart series={series} titleName={'CarbonDioxide'} color="#1974D2" />
         </div>
     );
 }

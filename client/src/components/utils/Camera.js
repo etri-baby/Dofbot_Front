@@ -70,8 +70,8 @@ function MqttCameraTry() {
             }}
         >
             <h4>Camera</h4>
-            {con === false ? (
-                <Spinner animation="border" role="status">
+            {con === false || imageData === '' ? (
+                <Spinner animation="border" role="status" style={{ padding: '1vmax' }}>
                     <span className="visually-hidden">카메라 불러오는 중...</span>
                 </Spinner>
             ) : (
@@ -83,6 +83,7 @@ function MqttCameraTry() {
                             maxHeight: '100%',
                             width: '100%',
                             height: '100%',
+
                             border: '1',
                             objectFit: 'contain',
                         }}

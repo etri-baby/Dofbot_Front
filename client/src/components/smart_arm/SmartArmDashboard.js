@@ -171,7 +171,7 @@ export default function SmartArmDashboard() {
                 </div>
             </div>
             <br />
-            <div className="grid grid-rows-2 grid-flow-col gap-4">
+            <div className="grid grid-rows-2  gap-4">
                 <div className="row-span-1">
                     <div>
                         <h2>{iotKey} Dashboard</h2>
@@ -228,8 +228,8 @@ export default function SmartArmDashboard() {
                 <div className="row-span-1 arm-custom-box justify-center">
                     <MqttCameraTry />
                 </div>
-                <div className="inner-fit-custom-box">
-                    <div className="grid grid-rows-2 grid-cols-4 grid-flow-col gap-4 mx-8 my-8">
+                <div className="row-span-2 col-span-2">
+                    <div className="inner-fit-custom-box">
                         <div className="grid grid-cols-3 direction-buttons">
                             <div>{/* Grid 1 */}</div>
                             <div>

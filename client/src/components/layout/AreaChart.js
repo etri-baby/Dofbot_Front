@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-function AreaChart({ series, titleName }) {
+function AreaChart({ series, titleName, color }) {
     const options = {
         series: [series],
         chart: {
@@ -30,6 +30,8 @@ function AreaChart({ series, titleName }) {
         legend: {
             horizontalAlign: 'left',
         },
+
+        colors: [color],
     };
 
     return (
