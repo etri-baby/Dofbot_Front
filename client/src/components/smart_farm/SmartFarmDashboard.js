@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import MqttCameraTry from '../utils/Camera';
 
 import Temperature from '../utils/Temperature';
 import Humidity from '../utils/Humidity';
@@ -11,6 +10,8 @@ import Illuminance from '../utils/Illuminance';
 import CarbonDioxide from '../utils/CarbonDioxide';
 import SoilHumidity from '../utils/SoilHumidity';
 import axios from 'axios';
+import Buttons from '../utils/Buttons';
+import Camera from '../utils/Camera';
 
 function SmartFarmDashboard() {
     const [iotKey, setIotKey] = useState('SmartFarm');
@@ -58,8 +59,6 @@ function SmartFarmDashboard() {
             .then((response) => {
                 const sensorDataArray = response.data;
 
-                console.log(sensorDataArray);
-
                 const temperatureArray = [];
                 const humidityArray = [];
                 const soilHumidityArray = [];
@@ -79,9 +78,6 @@ function SmartFarmDashboard() {
                 setHumidityData(humidityArray);
                 setSoilHumidityData(soilHumidityArray);
                 setIlluminanceData(illuminanceArray);
-
-                console.log(temperatureData);
-                console.log(humidityData);
             })
             .catch((error) => {
                 // 오류 처리 코드
@@ -242,9 +238,8 @@ function SmartFarmDashboard() {
                 <div className="custom-box">
                     <Humidity humidityData={humidityData} />
                 </div>
-
-                <div className="custom-box">
-                    <h4>Auto Control</h4>
+                <div></div>
+                {/* <div className="custom-box">
                     <div className="grid grid-cols-2  justify-items-stretch">
                         <CustomFormControl title={'Temperature'} />
                         <CustomFormControl title={'Humidity'} />
@@ -258,7 +253,7 @@ function SmartFarmDashboard() {
                         </Button>
                         <Button style={{ background: 'black', border: '1px solid black' }}>초기화</Button>
                     </div>
-                </div>
+                </div> */}
                 <div className="custom-box">
                     <Illuminance illuminanceData={illuminanceData} />
                 </div>
@@ -266,13 +261,16 @@ function SmartFarmDashboard() {
                     <SoilHumidity soilHumidityData={soilHumidityData} />
                 </div>
                 <div className="custom-box">
-                    <MqttCameraTry />
+                    <Camera />
                 </div>
                 <div className="custom-box">
                     <CarbonDioxide />
                 </div>
                 <div className="custom-box">
-                    <h4>Buttons</h4>
+                    <p style={{ textAlign: 'left', fontSize: '24px', paddingLeft: '1vmax', fontWeight: 'bold' }}>
+                        Actuator Control
+                    </p>
+                    <Buttons />
                 </div>
             </div>
         </div>

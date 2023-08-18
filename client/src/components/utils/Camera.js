@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Paho from 'paho-mqtt';
 import Spinner from 'react-bootstrap/Spinner';
 
-function MqttCameraTry() {
+function Camera() {
     const [imageData, setImageData] = useState('');
     const [client, setClient] = useState(null);
     const [con, setCon] = useState(false);
@@ -75,7 +75,7 @@ function MqttCameraTry() {
                     <span className="visually-hidden">카메라 불러오는 중...</span>
                 </Spinner>
             ) : (
-                <div style={{ maxWidth: '70%', maxHeight: '70%', width: '70%', height: '70%' }}>
+                <div style={{ maxWidth: '50%', maxHeight: '50%', width: '50%', height: '50%' }}>
                     <img
                         src={`data:image/jpeg;base64, ${imageData}`}
                         style={{
@@ -94,4 +94,4 @@ function MqttCameraTry() {
     );
 }
 
-export default MqttCameraTry;
+export default Camera;

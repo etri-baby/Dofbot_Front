@@ -8,7 +8,7 @@ function AreaChart({ series, titleName, color, subtitleName }) {
             type: 'area',
             height: 350,
             zoom: {
-                enabled: false,
+                enabled: true,
             },
         },
         dataLabels: {

@@ -13,7 +13,7 @@ function Illuminance({ illuminanceData }) {
 
     const series = [
         {
-            name: 'illuminanceData',
+            name: 'Illuminance',
             data: illuminanceData.map((item) => [new Date(item.timestamp).getTime(), item.illuminance]),
         },
     ];

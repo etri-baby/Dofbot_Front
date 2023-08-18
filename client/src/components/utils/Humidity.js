@@ -13,7 +13,7 @@ function Humidity({ humidityData }) {
 
     const series = [
         {
-            name: 'humidityData',
+            name: 'Humidity',
             data: humidityData.map((item) => [new Date(item.timestamp).getTime(), item.humidity]),
         },
     ];
