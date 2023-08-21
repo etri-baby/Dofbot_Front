@@ -89,7 +89,7 @@ function SmartFarmDashboard() {
 
     return (
         <div className="custom-border">
-            <div className="grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
+            <div className="gg grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
                 <div>{/* Grid 0 */}</div>
                 <div className="justify-self-start">
                     <div style={dataIntervalContainerStyle} className="d-flex justify-content-center">
@@ -147,7 +147,7 @@ function SmartFarmDashboard() {
                 </div>
             </div>
             <br />
-            <div className="grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
+            <div className="gg grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
                 <CustomTabContainer value={'SmartFarm'} />
                 <div className="custom-box">
                     <Temperature temperatureData={temperatureData} />

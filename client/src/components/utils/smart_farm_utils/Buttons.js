@@ -51,9 +51,18 @@ function Buttons() {
 
 export default Buttons;
 
+function getDataIntervalContainerStyle() {
+    const isMobile = window.innerWidth <= 768; // 화면 크기가 768px 이하이면 핸드폰 화면으로 간주
+    return {
+        border: '1px solid #000',
+        borderRadius: '2vmax',
+        width: isMobile ? '7.5vmax' : '3.5vmax',
+        margin: 'auto',
+    };
+}
+
 const dataIntervalContainerStyle = {
     border: '1px solid #000', // 테두리 스타일 설정
-    padding: '5px', // 내부 여백 설정
     borderRadius: '2vmax', // 테두리 곡선 설정
     width: '3.5vmax',
     margin: 'auto',
@@ -71,6 +80,8 @@ const activeTabItemStyle = {
 };
 
 function CustomTabContainer(props) {
+    const dataIntervalContainerStyle = getDataIntervalContainerStyle();
+
     const handleStatusChange = (eventKey) => {
         props.setStatus(eventKey);
         // 서버로 요청 보내기
@@ -88,7 +99,7 @@ function CustomTabContainer(props) {
 
     return (
         <div style={dataIntervalContainerStyle} className="d-flex items-stretch">
-            <div style={{ paddingTop: '10px' }}>
+            <div>
                 <Tab.Container>
                     <Row>
                         <Col>

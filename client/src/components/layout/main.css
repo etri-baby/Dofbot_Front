@@ -1,4 +1,25 @@
+.gg {
+    flex-wrap: wrap;
+}
+
+.gg > div {
+    flex: 1 0 calc(30.333% - 8px);
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .gg {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .gg > div {
+        flex: 1 0 100%;
+        margin-right: 0;
+    }
+}
 /* CustomButtonGroup */
+
 .custom-button {
     background-color: black;
     color: white;

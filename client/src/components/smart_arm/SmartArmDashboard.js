@@ -21,7 +21,7 @@ export default function SmartArmDashboard() {
 
     return (
         <div className="custom-border">
-            <div className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-x-4 gap-y-4">
+            <div className="gg grid grid-rows-2 grid-cols-3 grid-flow-col gap-x-4 gap-y-4">
                 <div>
                     <CustomTabContainer value={'SmartArm'} />
                 </div>
@@ -45,7 +45,7 @@ export default function SmartArmDashboard() {
                 </div>
             </div>
             <br />
-            <div className="grid grid-rows-1 grid-cols-3 grid-flow-row gap-x-4 gap-y-4">
+            <div className="gg grid grid-rows-1 grid-cols-3 grid-flow-row gap-x-4 gap-y-4 ">
                 <div className="custom-box">
                     <Camera />
                 </div>
