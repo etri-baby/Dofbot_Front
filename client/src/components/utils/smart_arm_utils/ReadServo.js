@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Paho from 'paho-mqtt';
+import { Table } from 'react-bootstrap';
 
 function ReadServo() {
     const [servoData, setServoData] = useState([]);
@@ -53,8 +54,6 @@ function ReadServo() {
         };
     }, []);
 
-    // MqttCameraTry.js
-
     return (
         <div
             style={{
@@ -65,8 +64,36 @@ function ReadServo() {
                 textAlign: 'center',
             }}
         >
-            <h4>Servo</h4>
-            <div style={{ maxWidth: '70%', maxHeight: '70%', width: '70%', height: '70%' }}>{servoData}</div>
+            <div className="servo-table">
+                <Table bordered>
+                    <tbody>
+                        <tr>
+                            <td>SERVO 1</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[0] + '°'}</td>
+                        </tr>
+                        <tr>
+                            <td>SERVO 2</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[1] + '°'}</td>
+                        </tr>
+                        <tr>
+                            <td>SERVO 3</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[2] + '°'}</td>
+                        </tr>
+                        <tr>
+                            <td>SERVO 4</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[3] + '°'}</td>
+                        </tr>
+                        <tr>
+                            <td>SERVO 5</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[4] + '°'}</td>
+                        </tr>
+                        <tr>
+                            <td>SERVO 6</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[5] + '°'}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
         </div>
     );
 }

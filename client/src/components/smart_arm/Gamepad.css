@@ -64,6 +64,9 @@
 
 .button-select {
     width: 60px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
 }
 
 .button-start {
