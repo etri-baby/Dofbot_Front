@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Col, Row, Tab, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
 
-import Temperature from '../utils/Temperature';
-import Humidity from '../utils/Humidity';
-import Illuminance from '../utils/Illuminance';
-import CarbonDioxide from '../utils/CarbonDioxide';
-import SoilHumidity from '../utils/SoilHumidity';
+import Temperature from '../utils/smart_farm_utils/Temperature';
+import Humidity from '../utils/smart_farm_utils/Humidity';
+import Illuminance from '../utils/smart_farm_utils/Illuminance';
+import CarbonDioxide from '../utils/smart_farm_utils/CarbonDioxide';
+import SoilHumidity from '../utils/smart_farm_utils/SoilHumidity';
 import axios from 'axios';
-import Buttons from '../utils/Buttons';
+import Buttons from '../utils/smart_farm_utils/Buttons';
 import Camera from '../utils/Camera';
 
 function SmartFarmDashboard() {
@@ -279,13 +278,13 @@ function SmartFarmDashboard() {
 
 export default SmartFarmDashboard;
 
-function CustomFormControl(props) {
-    return (
-        <>
-            <h5 className="text-center">{props.title}</h5>
-            <div style={{ paddingLeft: '1vmax' }}>
-                <Form.Control type={props.title} id={props.title} style={{ width: '7vmax', height: '1.5vmax' }} />
-            </div>
-        </>
-    );
-}
+// function CustomFormControl(props) {
+//     return (
+//         <>
+//             <h5 className="text-center">{props.title}</h5>
+//             <div style={{ paddingLeft: '1vmax' }}>
+//                 <Form.Control type={props.title} id={props.title} style={{ width: '7vmax', height: '1.5vmax' }} />
+//             </div>
+//         </>
+//     );
+// }

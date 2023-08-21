@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Paho from 'paho-mqtt';
 
-function Servo() {
+function ReadServo() {
     const [servoData, setServoData] = useState([]);
     const [client, setClient] = useState(null);
 
@@ -71,4 +71,4 @@ function Servo() {
     );
 }
 
-export default Servo;
+export default ReadServo;
