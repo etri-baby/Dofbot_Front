@@ -34,7 +34,7 @@ function ReadServo() {
         };
 
         mqttClient.onMessageArrived = (message) => {
-            setServoData(message.payloadString);
+            setServoData(JSON.parse(message.payloadString));
         };
 
         mqttClient.connect(connectOptions);
@@ -69,27 +69,27 @@ function ReadServo() {
                     <tbody>
                         <tr>
                             <td>SERVO 1</td>
-                            <td>{servoData.length === 0 ? 'NaN' : servoData[0] + '°'}</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[0]['1'] + '°'}</td>
                         </tr>
                         <tr>
                             <td>SERVO 2</td>
-                            <td>{servoData.length === 0 ? 'NaN' : servoData[1] + '°'}</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[1]['2'] + '°'}</td>
                         </tr>
                         <tr>
                             <td>SERVO 3</td>
-                            <td>{servoData.length === 0 ? 'NaN' : servoData[2] + '°'}</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[2]['3'] + '°'}</td>
                         </tr>
                         <tr>
                             <td>SERVO 4</td>
-                            <td>{servoData.length === 0 ? 'NaN' : servoData[3] + '°'}</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[3]['4'] + '°'}</td>
                         </tr>
                         <tr>
                             <td>SERVO 5</td>
-                            <td>{servoData.length === 0 ? 'NaN' : servoData[4] + '°'}</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[4]['5'] + '°'}</td>
                         </tr>
                         <tr>
                             <td>SERVO 6</td>
-                            <td>{servoData.length === 0 ? 'NaN' : servoData[5] + '°'}</td>
+                            <td>{servoData.length === 0 ? 'NaN' : servoData[5]['6'] + '°'}</td>
                         </tr>
                     </tbody>
                 </Table>
