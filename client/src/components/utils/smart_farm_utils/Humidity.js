@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AreaChart from '../../layout/AreaChart'; // AreaChart.js 파일 경로를 정확하게 지정
+import AreaChart from '../../layout/AreaChart';
 import axios from 'axios';
 
 function Humidity({ humidityData }) {

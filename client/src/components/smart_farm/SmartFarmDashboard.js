@@ -65,26 +65,24 @@ function SmartFarmDashboard() {
                 setSoilHumidityData(soilHumidityArray);
                 setIlluminanceData(illuminanceArray);
             })
-            .catch((error) => {
-                // 오류 처리 코드
-            });
+            .catch((error) => {});
     }, [intervalKey]);
 
     const dataIntervalContainerStyle = {
-        border: '1px solid #000', // 테두리 스타일 설정
-        padding: '5px', // 내부 여백 설정
-        borderRadius: '10px', // 테두리 곡선 설정
+        border: '1px solid #000',
+        padding: '5px',
+        borderRadius: '10px',
         width: '10vmax',
         margin: 'auto',
     };
 
     const tabItemStyle = {
-        color: 'black', // 선택되지 않은 탭의 글씨색
+        color: 'black',
     };
 
     const activeTabItemStyle = {
-        backgroundColor: 'black', // 선택된 탭의 배경색
-        color: 'white', // 선택된 탭의 글씨색
+        backgroundColor: 'black',
+        color: 'white',
     };
 
     return (

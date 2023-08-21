@@ -45,7 +45,7 @@ function Camera() {
             if (responseObject.errorCode !== 0) {
                 console.error(`MQTT 연결이 끊어졌습니다: ${responseObject.errorMessage}`);
                 setCon(false);
-                setTimeout(tryReconnect, 3000); // 3초 후 재연결 시도
+                setTimeout(tryReconnect, 3000);
             }
         };
 
@@ -56,8 +56,6 @@ function Camera() {
             }
         };
     }, []);
-
-    // MqttCameraTry.js
 
     return (
         <div

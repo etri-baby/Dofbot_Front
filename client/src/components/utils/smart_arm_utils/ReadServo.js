@@ -42,7 +42,7 @@ function ReadServo() {
         mqttClient.onConnectionLost = (responseObject) => {
             if (responseObject.errorCode !== 0) {
                 console.error(`MQTT 연결이 끊어졌습니다: ${responseObject.errorMessage}`);
-                setTimeout(tryReconnect, 3000); // 3초 후 재연결 시도
+                setTimeout(tryReconnect, 3000);
             }
         };
 

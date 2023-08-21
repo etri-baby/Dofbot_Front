@@ -52,7 +52,7 @@ function Buttons() {
 export default Buttons;
 
 function getDataIntervalContainerStyle() {
-    const isMobile = window.innerWidth <= 768; // 화면 크기가 768px 이하이면 핸드폰 화면으로 간주
+    const isMobile = window.innerWidth <= 768;
     return {
         border: '1px solid #000',
         borderRadius: '2vmax',
@@ -61,20 +61,13 @@ function getDataIntervalContainerStyle() {
     };
 }
 
-const dataIntervalContainerStyle = {
-    border: '1px solid #000', // 테두리 스타일 설정
-    borderRadius: '2vmax', // 테두리 곡선 설정
-    width: '3.5vmax',
-    margin: 'auto',
-};
-
 const tabItemStyle = {
-    color: 'black', // 선택되지 않은 탭의 글씨색
+    color: 'black',
 };
 
 const activeTabItemStyle = {
-    backgroundColor: 'black', // 선택된 탭의 배경색
-    color: 'white', // 선택된 탭의 글씨색
+    backgroundColor: 'black',
+    color: 'white',
 
     borderRadius: '2vmax',
 };
@@ -84,7 +77,7 @@ function CustomTabContainer(props) {
 
     const handleStatusChange = (eventKey) => {
         props.setStatus(eventKey);
-        // 서버로 요청 보내기
+
         const controlValue = eventKey === 'ON' ? 1 : 0;
         const url = `/api/smartfarm/actuator/control?kitType=farm&sensor=${props.sensor}&control=${controlValue}`;
         axios
@@ -92,9 +85,7 @@ function CustomTabContainer(props) {
             .then((response) => {
                 console.log(response.data);
             })
-            .catch((error) => {
-                // 에러 처리
-            });
+            .catch((error) => {});
     };
 
     return (

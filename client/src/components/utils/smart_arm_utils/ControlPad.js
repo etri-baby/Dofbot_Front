@@ -23,7 +23,7 @@ export function ControlPad() {
             setGamepadState(null);
         };
 
-        const gamepadLoop = setInterval(updateGamepadState, 100); // 100ms 간격으로 확인
+        const gamepadLoop = setInterval(updateGamepadState, 100);
 
         window.addEventListener('gamepadconnected', handleGamepadConnected);
         window.addEventListener('gamepaddisconnected', handleGamepadDisconnected);
@@ -36,7 +36,7 @@ export function ControlPad() {
     }, []);
 
     const sendGamepadDataToServer = async () => {
-        if (!gamepadState) return; // Don't send data if no gamepad is connected
+        if (!gamepadState) return;
 
         try {
             const buttons = {};
@@ -49,7 +49,6 @@ export function ControlPad() {
                 axes[`axis_${index}`] = axis;
             });
 
-            // Send the gamepad data to the server as URL query parameters
             const queryString = new URLSearchParams({
                 ...axes,
                 ...buttons,
@@ -62,7 +61,7 @@ export function ControlPad() {
     };
 
     useEffect(() => {
-        const interval = setInterval(sendGamepadDataToServer, 100); // 100ms interval to send data
+        const interval = setInterval(sendGamepadDataToServer, 100);
 
         return () => clearInterval(interval);
     }, [gamepadState]);
