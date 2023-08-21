@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import ArrowCircleDownOutlinedIcon from '@mui/icons-material/ArrowCircleDownOutlined';
+import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import ArrowCircleUpOutlinedIcon from '@mui/icons-material/ArrowCircleUpOutlined';
+
 function ControlServo() {
     const initialAxes = {
         0: -0.0039,
@@ -106,116 +111,125 @@ function ControlServo() {
     return (
         <div className="grid grid-rows-3 grid-cols-3 grid-flow-row gap-x-4 gap-y-4">
             <div>
+                <p className="subtitle">SERVO 1</p>
                 {/* servo1 왼쪽으로(로봇팔 왼쪽 회전) */}
                 <button
-                    className="button-left"
+                    className="left pad-buttons"
                     onMouseDown={() => handleAxisPress('0', -1)}
                     onMouseUp={() => handleAxisRelease('0', -0.0039)}
                 >
-                    ←
+                    <ArrowCircleLeftOutlinedIcon />
                 </button>
                 {/* servo1 오른쪽으로(로봇팔 오른쪽 회전) */}
                 <button
-                    className="button-right"
+                    className="right pad-buttons"
                     onMouseDown={() => handleAxisPress('0', 1)}
                     onMouseUp={() => handleAxisRelease('0', -0.0039)}
                 >
-                    →
+                    <ArrowCircleRightOutlinedIcon />
                 </button>
             </div>
             <div>
+                <p className="subtitle">SERVO 2</p>
                 {/* servo2의 각도 하강(로봇팔 하강)*/}
                 <button
-                    className="button-up"
+                    className="left pad-buttons"
                     onMouseDown={() => handleAxisPress('1', -1)}
                     onMouseUp={() => handleAxisRelease('1', -0.0039)}
                 >
-                    ↑
+                    <ArrowCircleDownOutlinedIcon />
                 </button>
 
                 {/* servo2의 각도 상승(로봇팔 상승)*/}
                 <button
-                    className="button-down"
+                    className="left pad-buttons"
                     onMouseDown={() => handleAxisPress('1', 1)}
                     onMouseUp={() => handleAxisRelease('1', -0.0039)}
                 >
-                    ↓
+                    <ArrowCircleUpOutlinedIcon />
                 </button>
             </div>
             <div>
                 {/* 왼쪽 뒷 버튼 1, 2 */}
+                <p className="subtitle">SERVO 3</p>
+                {/* Servo3 아래로(angle 하강) */}
                 <button
-                    className="button-4"
+                    className="left pad-buttons"
                     onMouseDown={() => handleButtonPress('4')}
                     onMouseUp={() => handleButtonRelease('4')}
                 >
-                    {/* Servo3 아래로(angle 하강) */}L1
+                    <ArrowCircleDownOutlinedIcon />
                 </button>
-
+                {/* Servo3 위로(angle 상승) */}
                 <button
-                    className="button-4"
+                    className="right pad-buttons"
                     onMouseDown={() => handleButtonPress('6')}
                     onMouseUp={() => handleButtonRelease('6')}
                 >
-                    {/* Servo3 위로(angle 상승) */}L2
+                    <ArrowCircleUpOutlinedIcon />
                 </button>
             </div>
             <div>
                 {/* 오른쪽 뒷 버튼 1, 2 */}
+                <p className="subtitle">SERVO 4</p>
+                {/* Servo4 아래로(angle 하강) */}
                 <button
-                    className="button-4"
+                    className="left pad-buttons"
                     onMouseDown={() => handleButtonPress('5')}
                     onMouseUp={() => handleButtonRelease('5')}
                 >
-                    {/* Servo4 아래로(angle 하강) */}R1
+                    <ArrowCircleDownOutlinedIcon />
                 </button>
-
+                {/* Servo4 위로(angle 상승) */}
                 <button
-                    className="button-4"
+                    className="right pad-buttons"
                     onMouseDown={() => handleButtonPress('7')}
                     onMouseUp={() => handleButtonRelease('7')}
                 >
-                    {/* Servo4 위로(angle 상승) */}R2
+                    <ArrowCircleUpOutlinedIcon />
                 </button>
             </div>
             <div>
+                <p className="subtitle">SERVO 5</p>
+                {/* Servo5 왼쪽 회전(angle 상승) */}
                 <button
-                    className="button-2"
+                    className="left pad-buttons"
                     onMouseDown={() => handleButtonPress('1')}
                     onMouseUp={() => handleButtonRelease('1')}
                 >
-                    {/* Servo5 왼쪽 회전(angle 상승) */} 2
+                    <ArrowCircleLeftOutlinedIcon />
                 </button>
-
+                {/* Servo5 오른쪽 회전(angle 하강) */}
                 <button
-                    className="button-4"
+                    className="right pad-buttons"
                     onMouseDown={() => handleButtonPress('3')}
                     onMouseUp={() => handleButtonRelease('3')}
                 >
-                    {/* Servo5 오른쪽 회전(angle 하강) */}4
+                    <ArrowCircleRightOutlinedIcon />
                 </button>
             </div>
             <div>
+                <p className="subtitle">SERVO 6</p>
                 {/* 집기 */}
                 <button
-                    className="button-1"
+                    className="left pad-buttons"
                     onMouseDown={() => handleButtonPress('0')}
                     onMouseUp={() => handleButtonRelease('0')}
                 >
-                    1
+                    PICK
                 </button>
-
+                {/* 놓기 */}
                 <button
-                    className="button-3"
+                    className="right pad-buttons"
                     onMouseDown={() => handleButtonPress('2')}
                     onMouseUp={() => handleButtonRelease('2')}
                 >
-                    {/* 놓기 */}3
+                    DROP
                 </button>
             </div>
             <div></div>
             <div></div>
-            <div>
+            <div className="grid place-items-end" style={{ padding: '20px' }}>
                 <button
                     className="button-select"
                     onMouseDown={() => handleButtonPress('8')}

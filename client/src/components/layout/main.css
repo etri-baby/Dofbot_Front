@@ -50,6 +50,12 @@
     font-weight: bold;
 }
 
+.subtitle {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .servo-table {
     max-width: 70%;
     width: 70%;
