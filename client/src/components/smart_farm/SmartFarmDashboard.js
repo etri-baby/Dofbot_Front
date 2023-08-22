@@ -9,8 +9,8 @@ import CarbonDioxide from '../utils/smart_farm_utils/CarbonDioxide';
 import SoilHumidity from '../utils/smart_farm_utils/SoilHumidity';
 import axios from 'axios';
 import Buttons from '../utils/smart_farm_utils/Buttons';
-import Camera from '../utils/Camera';
 import CustomTabContainer from '../utils/CustomTabContainer';
+import Esp32Cam from '../utils/smart_farm_utils/Esp32Cam';
 
 function SmartFarmDashboard() {
     const [intervalKey, setIntervalKey] = useState('1D');
@@ -87,7 +87,7 @@ function SmartFarmDashboard() {
 
     return (
         <div className="custom-border">
-            <div className="gg grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
+            <div className="gg grid gap-x-4 gap-y-6 grid-cols-3 justify-items-stretch">
                 <div>{/* Grid 0 */}</div>
                 <div className="justify-self-start">
                     <div style={dataIntervalContainerStyle} className="d-flex justify-content-center">
@@ -145,7 +145,7 @@ function SmartFarmDashboard() {
                 </div>
             </div>
             <br />
-            <div className="gg grid gap-x-4 gap-y-14 grid-cols-3 justify-items-stretch">
+            <div className="gg grid gap-x-4 gap-y-6 grid-cols-3 justify-items-stretch">
                 <CustomTabContainer value={'SmartFarm'} />
                 <div className="custom-box">
                     <Temperature temperatureData={temperatureData} />
@@ -161,7 +161,7 @@ function SmartFarmDashboard() {
                     <SoilHumidity soilHumidityData={soilHumidityData} />
                 </div>
                 <div className="custom-box">
-                    <Camera />
+                    <Esp32Cam />
                 </div>
                 <div className="custom-box">
                     <CarbonDioxide />
