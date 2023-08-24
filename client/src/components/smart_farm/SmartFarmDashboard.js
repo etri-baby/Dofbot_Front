@@ -60,6 +60,7 @@ function SmartFarmDashboard() {
                     illuminanceArray.push({ illuminance: parsedData.illuminance, timestamp: timestamp });
                 });
 
+
                 setTemperatureData(temperatureArray);
                 setHumidityData(humidityArray);
                 setSoilHumidityData(soilHumidityArray);
