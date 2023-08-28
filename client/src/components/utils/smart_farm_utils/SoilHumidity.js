@@ -6,7 +6,7 @@ function SoilHumidity({ soilHumidityData }) {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        axios.get('/api/smartfarm/sensor/soil').then((response) => {
+        axios.get(process.env.REACT_APP_SERVER + '/api/smartfarm/sensor/soil').then((response) => {
             setValue(response.data);
         });
     }, [value]);

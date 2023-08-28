@@ -6,7 +6,7 @@ function CarbonDioxide(intervalKey) {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        axios.get('/api/smartfarm/sensor/illu').then((response) => {
+        axios.get(process.env.REACT_APP_SERVER + '/api/smartfarm/sensor/illu').then((response) => {
             setValue(response.data);
         });
     }, [value]);

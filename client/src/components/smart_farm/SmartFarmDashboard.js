@@ -36,7 +36,7 @@ function SmartFarmDashboard() {
         const formattedEnd = end.toISOString().split('T')[0];
 
         axios
-            .get('/api/smartfarm/sensor/date', {
+            .get(process.env.REACT_APP_SERVER + '/api/smartfarm/sensor/date', {
                 params: {
                     start: formattedStart,
                     end: formattedEnd,

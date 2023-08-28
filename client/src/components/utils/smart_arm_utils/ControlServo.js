@@ -76,7 +76,9 @@ function ControlServo() {
 
             const queryString = `${formattedAxes}&${formattedButtons}`;
 
-            const response = await axios.post(`/api/smartarm/send_pad_data?${queryString}`);
+            const response = await axios.post(
+                `${process.env.REACT_APP_SERVER}/api/smartarm/send_pad_data?${queryString}`
+            );
             console.log(response.data);
         } catch (error) {
             console.error('Error sending gamepad input:', error);
@@ -95,7 +97,9 @@ function ControlServo() {
 
             const queryString = `${formattedAxes}&${formattedButtons}`;
 
-            const response = await axios.post(`/api/smartarm/send_pad_data?${queryString}`);
+            const response = await axios.post(
+                `${process.env.REACT_APP_SERVER}/api/smartarm/send_pad_data?${queryString}`
+            );
             console.log(response.data);
         } catch (error) {
             console.error('Error sending gamepad input:', error);

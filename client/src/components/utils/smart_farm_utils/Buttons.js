@@ -14,7 +14,7 @@ function Buttons() {
     const [windowStatus, setWindowStatus] = useState('');
 
     useEffect(() => {
-        axios.get('/api/smartfarm/actuator').then((response) => {
+        axios.get(process.env.REACT_APP_SERVER + '/api/smartfarm/actuator').then((response) => {
             const data = response.data;
             setLedStatus(data.led === 0 ? 'OFF' : 'ON');
             setFanStatus(data.fan === 0 ? 'OFF' : 'ON');
@@ -27,20 +27,20 @@ function Buttons() {
         <div className="d-flex justify-content-center">
             <CustomTabContainer
                 className="self-center"
-                actuator={'led'}
+                sensor={'led'}
                 status={ledStatus}
                 setStatus={setLedStatus}
                 icon={<LightbulbOutlinedIcon />}
             />
-            <CustomTabContainer actuator={'fan'} status={fanStatus} setStatus={setFanStatus} icon={<AirOutlinedIcon />} />
+            <CustomTabContainer sensor={'fan'} status={fanStatus} setStatus={setFanStatus} icon={<AirOutlinedIcon />} />
             <CustomTabContainer
-                actuator={'pump'}
+                sensor={'pump'}
                 status={pumpStatus}
                 setStatus={setPumpStatus}
                 icon={<WaterDropOutlinedIcon />}
             />
             <CustomTabContainer
-                actuator={'window'}
+                sensor={'window'}
                 status={windowStatus}
                 setStatus={setWindowStatus}
                 icon={<WindowOutlinedIcon />}
@@ -56,7 +56,7 @@ function getDataIntervalContainerStyle() {
     return {
         border: '1px solid #000',
         borderRadius: '2vmax',
-        width: isMobile ? '7.5vmax' : '2.5vmax',
+        width: isMobile ? '7.5vmax' : '3.5vmax',
         margin: 'auto',
     };
 }
@@ -79,7 +79,9 @@ function CustomTabContainer(props) {
         props.setStatus(eventKey);
 
         const controlValue = eventKey === 'ON' ? 1 : 0;
-        const url = `/api/smartfarm/actuator/control?kitType=farm&actuator=${props.actuator}&control=${controlValue}`;
+        const url =
+            process.env.REACT_APP_SERVER +
+            `/api/smartfarm/actuator/control?kitType=farm&sensor=${props.sensor}&control=${controlValue}`;
         axios
             .post(url)
             .then((response) => {
@@ -87,6 +89,9 @@ function CustomTabContainer(props) {
             })
             .catch((error) => {});
     };
+    {
+        /* 렌더링 */
+    }
 
     return (
         <div style={dataIntervalContainerStyle} className="d-flex items-stretch">

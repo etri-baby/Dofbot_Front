@@ -54,7 +54,7 @@ export function ControlPad() {
                 ...buttons,
             }).toString();
 
-            await axios.post(`/api/smartarm/send_pad_data?${queryString}`);
+            await axios.post(process.env.REACT_APP_SERVER + `/api/smartarm/send_pad_data?${queryString}`);
         } catch (error) {
             console.error('Error sending gamepad data:', error);
         }
