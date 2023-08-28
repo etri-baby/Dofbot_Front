@@ -25,7 +25,7 @@ function SmartFarmDashboard() {
         if (intervalKey === '1D') {
             start = end;
         } else if (intervalKey === '1W') {
-            start.setDate(start.getDate() - 6);
+            start.setDate(start.getDate() - 7);
         } else if (intervalKey === '1M') {
             start.setMonth(start.getMonth() - 1);
         }
@@ -59,7 +59,6 @@ function SmartFarmDashboard() {
                     soilHumidityArray.push({ soilHumidity: parsedData.soilhumidity, timestamp: timestamp });
                     illuminanceArray.push({ illuminance: parsedData.illuminance, timestamp: timestamp });
                 });
-
 
                 setTemperatureData(temperatureArray);
                 setHumidityData(humidityArray);
