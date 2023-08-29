@@ -6,7 +6,7 @@ function Humidity({ humidityData }) {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_SERVER + '/api/smartfarm/sensor/humi').then((response) => {
+        axios.get(process.env.REACT_APP_FARM_SERVER + '/api/smartfarm/sensor/humi').then((response) => {
             setValue(response.data);
         });
     }, [value]);

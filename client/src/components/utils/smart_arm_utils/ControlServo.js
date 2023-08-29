@@ -77,7 +77,7 @@ function ControlServo() {
             const queryString = `${formattedAxes}&${formattedButtons}`;
 
             const response = await axios.post(
-                `${process.env.REACT_APP_SERVER}/api/smartarm/send_pad_data?${queryString}`
+                `${process.env.REACT_APP_ARM_SERVER}/api/smartarm/send_pad_data?${queryString}`
             );
             console.log(response.data);
         } catch (error) {
@@ -98,7 +98,7 @@ function ControlServo() {
             const queryString = `${formattedAxes}&${formattedButtons}`;
 
             const response = await axios.post(
-                `${process.env.REACT_APP_SERVER}/api/smartarm/send_pad_data?${queryString}`
+                `${process.env.REACT_APP_ARM_SERVER}/api/smartarm/send_pad_data?${queryString}`
             );
             console.log(response.data);
         } catch (error) {

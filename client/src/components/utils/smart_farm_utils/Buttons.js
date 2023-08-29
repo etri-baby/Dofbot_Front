@@ -14,7 +14,7 @@ function Buttons() {
     const [windowStatus, setWindowStatus] = useState('');
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_SERVER + '/api/smartfarm/actuator').then((response) => {
+        axios.get(process.env.REACT_APP_FARM_SERVER + '/api/smartfarm/actuator').then((response) => {
             const data = response.data;
             setLedStatus(data.led === 0 ? 'OFF' : 'ON');
             setFanStatus(data.fan === 0 ? 'OFF' : 'ON');
@@ -80,8 +80,8 @@ function CustomTabContainer(props) {
 
         const controlValue = eventKey === 'ON' ? 1 : 0;
         const url =
-            process.env.REACT_APP_SERVER +
-            `/api/smartfarm/actuator/control?kitType=farm&sensor=${props.sensor}&control=${controlValue}`;
+            process.env.REACT_APP_FARM_SERVER +
+            `/api/smartfarm/actuator/control?kitType=farm&actuator=${props.sensor}&control=${controlValue}`;
         axios
             .post(url)
             .then((response) => {

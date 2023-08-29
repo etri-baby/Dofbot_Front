@@ -6,7 +6,7 @@ function Temperature({ temperatureData }) {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_SERVER + '/api/smartfarm/sensor/temp').then((response) => {
+        axios.get(process.env.REACT_APP_FARM_SERVER + '/api/smartfarm/sensor/temp').then((response) => {
             setValue(response.data);
         });
     }, [value]);
