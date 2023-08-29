@@ -8,7 +8,7 @@ function Camera() {
     const [con, setCon] = useState(false);
 
     useEffect(() => {
-        const brokerHost = '129.254.174.120';
+        const brokerHost = process.env.REACT_APP_MQTT;
         const brokerPort = 9002;
         const clientId = `mqtt_subscriber_${Math.random().toString(16).substr(2, 8)}`;
         const topic = 'jetson/camera';
