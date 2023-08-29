@@ -44,7 +44,7 @@ function AreaChart({ series, titleName, color, subtitleName }) {
 
     return (
         <div>
-            <ReactApexChart options={options} series={series} type="area" height={210} />
+            <ReactApexChart options={options} series={series} type="area" height={360} />
         </div>
     );
 }
